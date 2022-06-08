@@ -129,9 +129,10 @@ def generate_meta_and_test_tasks(num_datapoints, num_meta, num_test, N):
 num_datapoints = 5
 # Although the original experiment uses (1000, 200, 50) for the following
 # parameters, we will use (50, 10, 500) for computational reasons.
-num_meta_tasks = 50
-num_test_tasks = 10
+num_meta_tasks = ci_niter(50)
+num_test_tasks = ci_niter(10)
 num_data_per_task = 500
+num_iter = ci_niter(5)
 meta, test = generate_meta_and_test_tasks(
     num_datapoints, num_meta_tasks, num_test_tasks, num_data_per_task
 )
@@ -215,7 +216,7 @@ def run_adam(model, iterations):
 import time
 
 
-def train_loop(meta_tasks, num_iter=5):
+def train_loop(meta_tasks):
     """
     Metalearning training loop. Trained for 100 epochs in original experiment.
 
